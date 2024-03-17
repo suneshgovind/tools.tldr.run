@@ -17,7 +17,7 @@ jobs:
           TOTAL_ENTRIES=($(cat *.json | jq '.name' | sort | wc -l))
           echo "Total entries = " "$TOTAL_ENTRIES"
           echo "Unique entries = " "$UNIQUE_ENTRIES"
-          if [ "$UNIQUE_ENTRIES" -ne "$TOTAL_ENTRIES" ]; echo "Duplicate entries list"; cat *.json | jq '.name' | sort | uniq -i -c -d; then exit 1; fi
+          if [ "$UNIQUE_ENTRIES" -ne "$TOTAL_ENTRIES" ]; then echo "Duplicate entries list"; cat *.json | jq '.name' | sort | uniq -i -c -d; exit 1; fi
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
